@@ -1,0 +1,55 @@
+<html>
+	<head>
+	</head>
+
+	<body>
+		<p>Welcome home, {{ user }}.</p>
+		<a href="/list/logout/">Logout</a>
+
+		<p>Your Ping list:</p>
+		<ul>
+		{% for ping in pings %}
+			<li>
+				Requester: {{ ping.requester }}
+				<br>
+				Description: {{ ping.description }}
+				<br>
+				Time: {{ ping.time }}
+				<br>
+				Priority: {{ ping.priority }}
+				<br>
+				Status: {{ ping.status }}
+			</li>
+		{% endfor %}
+		</ul>
+
+		<p>Sent:</p>
+		<ul>
+		{% for ping in sent %}
+			<li>
+				Owner: {{ ping.owner }}
+				<br>
+				Description: {{ ping.description }}
+				<br>
+				Time: {{ ping.time }}
+				<br>
+				Priority: {{ ping.priority }}
+				<br>
+				Status: {{ ping.status }}
+			</li>
+		{% endfor %}
+		</ul>
+
+		<form id="ping_form" method="post" action="/list/send_ping/">
+			{% csrf_token %}
+			<label>To:</label>
+			<input type="text" name="owner"></input>
+			<br>
+			<label>Description:</label>
+			<input type="text" name="description"></input>
+			<br>
+			<input type="submit">
+		</form>
+
+	</body>
+</html>

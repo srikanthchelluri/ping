@@ -1,0 +1,21 @@
+<html>
+	<head>
+	</head>
+
+	<body>
+		<p>Login to Ping.</p>
+
+		<form id="login_form" method="post" action="/list/login/">
+			{% csrf_token %}
+			<label>Username:</label>
+			<input type="text" name="username"></input>
+			<br>
+			<label>Password:</label>
+			<input type="password" name="password"></input>
+			<br>
+			<input type="submit">
+		</form>
+
+		{{ failed }}
+	</body>
+</html>
