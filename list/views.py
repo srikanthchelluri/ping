@@ -38,9 +38,9 @@ def logout_auth(request):
 
 def home(request):
 	user = request.user
-	pings = Ping.objects.filter(owner=request.user).order_by('time')
-	sent = Ping.objects.filter(requester=request.user).order_by('time')
-	return render(request, 'list/home.html', {'user': user, 'pings': pings, 'sent': sent})
+	ping_list = Ping.objects.filter(owner=request.user).order_by('time')
+	sent_list = Ping.objects.filter(requester=request.user).order_by('time')
+	return render(request, 'list/home.html', {'user': user, 'ping_list': ping_list, 'sent_list': sent_list})
 
 def send_ping(request):
 	if request.method == 'POST':
