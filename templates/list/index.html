@@ -1,10 +1,44 @@
-<html>
+{% load staticfiles %}
+
+<html lang="en">
 	<head>
+		<meta name="author" content="Srikanth Chelluri">
+
+		<title>Ping</title>
+
+		<link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+		<link href="{% static "css/cover.css" %}" rel="stylesheet">
 	</head>
 
 	<body>
-		<p>This is Ping.</p>
-		<a href="/list/login">Login</a>
-		<a href="/list/register">Register</a>
+
+		<div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+
+          <div class="inner cover">
+            <h1 class="cover-heading">the world is pinging.</h1>
+            <p class="lead">a minimal to-do list, calendar, and messenger hybrid</p>
+            <p class="lead">
+              <a href="login" class="btn btn-lg btn-default">login</a>
+              <a href="signup" class="btn btn-lg btn-default">sign up</a>
+            </p>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>
+              	Srikanth Chelluri
+              	<br>
+              	<em>Copyright &copy; 2016 · All rights reserved.</em>
+              </p>
+              <p></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
 	</body>
 </html>

@@ -21,7 +21,7 @@ def login_auth(request):
 			return render(request, 'list/login.html', {'failed': "failed"})
 	else:
 		return render(request, 'list/login.html')
-def register_auth(request):
+def signup_auth(request):
 	if request.method == 'POST':
 		user_form = UserForm(data=request.POST)
 		if user_form.is_valid():
@@ -31,7 +31,7 @@ def register_auth(request):
 		return HttpResponseRedirect('/list/')
 	else:
 		user_form = UserForm()
-	return render(request, 'list/register.html', {'user_form': user_form})
+	return render(request, 'list/signup.html', {'user_form': user_form})
 def logout_auth(request):
 	logout(request)
 	return HttpResponseRedirect('/list/')

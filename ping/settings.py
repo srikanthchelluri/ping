@@ -17,6 +17,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Added directories
 TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
+STATIC_PATH = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    STATIC_PATH,
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
