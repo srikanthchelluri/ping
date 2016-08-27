@@ -5,7 +5,7 @@ from django.db import models
 class Ping(models.Model):
 	owner = models.ForeignKey(User, related_name='owner', default='')
 	requester = models.ForeignKey(User, related_name='requester', default='')
-	description = models.TextField()
+	description = models.CharField(max_length=45)
 	time = models.DateTimeField(auto_now=True)
-	priority = models.CharField(max_length=6) # low, normal, high
+	priority = models.BooleanField() # True, False
 	status = models.CharField(max_length=6) # open, closed

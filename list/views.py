@@ -50,11 +50,14 @@ def send_ping(request):
 		if len(ownerSet) != 1:
 			return HttpResponseRedirect('/list/home/')
 		owner = ownerSet[0]
+		priority = False
+		if request.POST.get('submit') == "priority":
+			priority = True
 		ping = Ping(
 			requester=request.user,
 			owner=owner,
 			description=description,
-			priority="normal"
+			priority=priority
 		)
 		ping.save()
 		return HttpResponseRedirect('/list/home/')
