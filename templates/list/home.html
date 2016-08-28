@@ -18,12 +18,17 @@
         <div class="cover-container">
 
           <div class="inner cover">
-            <h1 class="page-header"><b><a href="/list/logout/">{{ user }}</a></b></h1>
+            <h1 class="display-4" style="font-size: 38px">
+            	<b>{{ user.first_name }} {{ user.last_name }}</b>
+            	<p class="lead"><a href="/list/logout/">@{{ user.username }}</a></p>
+            </h2>
 
             <form id="ping_form" method="post" action="/list/send_ping/" style="padding-top: 25px">
 							{% csrf_token %}
-							<div class="form-group">
-								<input type="text" name="owner" class="form-control input-lg" placeholder="to">
+							<div class="form-group input-group">
+								<div class="input-group-addon">@</div>
+								<input type="text" name="owner" class="form-control input-lg" placeholder="to" required>
+								<!-- add look ahead -->
 							</div>
 							<div class="form-group">
 								<input type="text" name="description" class="form-control" placeholder="brief description (optional)">
@@ -47,13 +52,14 @@
 											{% for ping in ping_list %}
 											<tr>
 												<td>
-													<b style="font-size: 24px">{{ ping.requester }}</b>
+													<b style="font-size: 24px">{{ ping.requester.first_name }} {{ ping.requester.last_name }}.</b>
+													<span>@{{ ping.requester.username }}</span>
 													{% if ping.priority %}
 														<span style="font-size: 12px"> · This is high priority</span>
 													{% endif %}
 													<br>
 													{% if ping.description %}
-														{{ ping.description }}
+														<b>{{ ping.description }}</b>
 														<br>
 													{% endif %}
 													<span style="font-size: 12px">{{ ping.time|timesince }} ago</span>
@@ -81,7 +87,8 @@
 											{% for ping in sent_list %}
 											<tr>
 												<td>
-													<b style="font-size: 24px">{{ ping.owner }}</b>
+													<b style="font-size: 24px">{{ ping.owner.first_name }} {{ ping.owner.last_name }}.</b>
+													<span>@{{ ping.owner.username }}</span>
 													{% if ping.priority %}
 														<span style="font-size: 12px"> · This is high priority</span>
 													{% endif %}

@@ -2,6 +2,9 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+
+# add ping count to User
+
 class Ping(models.Model):
 	owner = models.ForeignKey(User, related_name='owner', default='')
 	requester = models.ForeignKey(User, related_name='requester', default='')
