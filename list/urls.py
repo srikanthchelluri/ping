@@ -9,5 +9,6 @@ urlpatterns = [
 	url(r'^logout/$', views.logout_auth, name='logout'),
 
 	url(r'^home/$', views.home, name='home'),
-	url(r'^send_ping/$', views.send_ping, name='send_ping'),	
+	url(r'^send_ping/$', views.send_ping, name='send_ping'),
+	url(r'^delete_ping/(?P<ping_slug>[A-Za-z0-9_\-]+)$', views.delete_ping, name='delete_ping'),
 ]

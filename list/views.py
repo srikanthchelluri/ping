@@ -18,7 +18,7 @@ def login_auth(request):
 			login(request, user)
 			return HttpResponseRedirect('/list/home/')
 		else:
-			return render(request, 'list/login.html', {'failed': "failed"})
+			return render(request, 'list/login.html', {'failed_message': "that wasn't right - try again."})
 	else:
 		return render(request, 'list/login.html')
 def signup_auth(request):
@@ -28,7 +28,9 @@ def signup_auth(request):
 			user = user_form.save()
 			user.set_password(user.password)
 			user.save()
-		return HttpResponseRedirect('/list/')
+			user = authenticate(username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password'])
+			login(request, user)
+			return HttpResponseRedirect('/list/home/')
 	else:
 		user_form = UserForm()
 	return render(request, 'list/signup.html', {'user_form': user_form})
@@ -50,16 +52,17 @@ def send_ping(request):
 		if len(ownerSet) != 1:
 			return HttpResponseRedirect('/list/home/')
 		owner = ownerSet[0]
-		priority = False
-		if request.POST.get('submit') == "priority":
-			priority = True
+		priority = request.POST.get('submit') == "priority"
 		ping = Ping(
 			requester=request.user,
 			owner=owner,
 			description=description,
-			priority=priority
+			priority=priority,
 		)
 		ping.save()
 		return HttpResponseRedirect('/list/home/')
 	else:
 		return HttpResponseRedirect('/list/home/')
+def delete_ping(request, ping_slug):
+	ping = Ping.objects.filter(slug=ping_slug).delete()
+	return HttpResponseRedirect('/list/home/')
